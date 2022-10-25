@@ -1,0 +1,21 @@
+{
+	"name": "mini solartify",
+	"start_url": "/",
+	"scope": ".",
+	"display": "standalone",
+	"theme_color": "#ff00ff",
+	"background_color": "#E6DAE6",
+	"description": "lol",
+	"icons": [
+		{
+			"src": "/media/solar_spotify_logo_1.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "/media/solar_spotify_logo_3.png",
+			"sizes": "64x64",
+			"type": "image/png"
+		}
+	]
+}

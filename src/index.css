@@ -1,0 +1,72 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+	background-color: rgb(230, 218, 230);
+	height: 100%;
+}
+body {
+	height: 100%;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	text-align: center;
+	height: 100%;
+}
+
+#title-container {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+#version {
+	font-size: 0.8em;
+	color: grey;
+}
+
+#container {
+	flex-grow: 2;
+}
+
+button {
+	font-size: 1.6rem;
+	padding: 1rem;
+	border-radius: 5px;
+	margin: 1rem;
+	box-shadow: none;
+}
+
+button:not(:disabled) {
+	color: black;
+}
+
+#login > button {
+	font-size: 1.2em;
+}
+
+.hide-keep-layout {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#about button {
+	cursor: not-allowed;
+	margin-bottom: 2px;
+}
+
+#about > p {
+	opacity: 0.7;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/media/solar_spotify_logo_3.png" />
+		<title>Solartify - Songs</title>
+		<script type="module" src="/src/js/songs.js"></script>
+		<link rel="stylesheet" href="songs.css" />
+		<link rel="manifest" href="/manifest.json" />
+		<script type="module" src="/components/globalNav.js"></script>
+	</head>
+	<body>
+		<div id="loading-container">
+			<div id="spinner-container">
+				<div id="spinner">
+					<p id="spinner-percentage" title="This text is not moving"></p>
+				</div>
+			</div>
+		</div>
+		<div id="search-help-container" class="hide">
+			<h5>Search for songs by name, artist or album</h5>
+			<p id="search-by-artist">Search by artist: "<span>by:artistName</span>"</p>
+			<p id="search-by-album">Search by album: "<span>in:albumName</span>"</p>
+		</div>
+		<header>
+			<global-nav></global-nav>
+		</header>
+		<main>
+			<div id="search-container">
+				<button id="search-help" type="button">Help</button>
+				<input type="text" id="search-input" placeholder="Search" />
+				<button id="search-button" type="button">Search</button>
+			</div>
+			<div id="songs-container">
+				<ul id="songs-list">
+					<template id="song-template">
+						<li class="list-item">
+							<img class="song-img" src="" alt="" />
+							<div class="name-container">
+								<p class="song-name">song name</p>
+								<p class="song-author">song author</p>
+							</div>
+							<p class="song-duration">song duration</p>
+						</li>
+					</template>
+				</ul>
+			</div>
+		</main>
+	</body>
+</html>

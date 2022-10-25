@@ -1,0 +1,212 @@
+* {
+	margin: 0;
+	padding: 0;
+	color: white;
+}
+
+@media only screen and (max-width: 600px) {
+	html {
+		overflow: hidden;
+	}
+	#desktop-nag {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	#desktop-nag {
+		display: initial;
+		opacity: 1;
+	}
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+#menu,
+#decide-menu {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	padding: 20px;
+	background-color: rgb(84, 84, 84);
+	border: solid 2px black;
+	border-radius: 10px;
+	z-index: 3;
+}
+
+#login-container #q-container {
+	margin: 10px;
+	width: 100%;
+}
+
+#custom-nav,
+#decide-menu {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+#custom-nav button,
+#decide-menu button {
+	color: black;
+	padding: 5px;
+	font-size: 1.3em;
+	margin: 5px;
+}
+
+#decide-menu > div {
+	margin: 5px auto 5px auto;
+}
+
+#menu-cover {
+	background-color: black;
+	opacity: 45%;
+}
+
+button:not(#custom-nav button, #decide-menu button) {
+	background-color: rgb(60, 60, 60);
+}
+
+.static-img:not(.big-button img) {
+	filter: invert(100%); /* im too lazy to remake the images  */
+}
+
+#background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: -1;
+
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+
+	background: rgb(124, 124, 124);
+	background: linear-gradient(0deg, rgb(179, 179, 179) 0%, rgb(211, 211, 211) 100%);
+
+	filter: blur(10px) brightness(70%);
+}
+#error {
+	color: black;
+	background: white;
+	position: absolute;
+}
+#playlist-name-container {
+	font-size: 20px;
+	margin: 2px auto 4px 20px;
+}
+#player {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#album-art {
+	box-shadow: 0 0 4px 2px rgb(21, 0, 21);
+	width: 90vw;
+	margin-top: 4px;
+	background: linear-gradient(0deg, rgb(179, 179, 179) 0%, rgb(211, 211, 211) 100%);
+}
+
+#song-info {
+	margin: 10px auto 10px 20px;
+}
+
+.cool-text-container {
+	font-size: 24px;
+	text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+
+#controls-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+}
+
+#controls-container > button {
+	color: black;
+	padding: 10px;
+	margin: 5px;
+	width: 100%;
+}
+.big-button {
+	display: none;
+	box-sizing: border-box;
+	color: black;
+	margin: 20px;
+	padding: 10px;
+	width: 90%;
+	height: 100%;
+}
+
+#desktop-nag {
+	font-family: Arial, Helvetica, sans-serif;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1.8em;
+	text-align: center;
+	background: rgb(54, 54, 54);
+	padding: 20px;
+	border-radius: 10px;
+	border: 2px solid black;
+	cursor: pointer;
+	transition: opacity 0.2s ease-in-out;
+}
+
+#desktop-nag > p {
+	margin: 25px 20px;
+}
+
+#nag-ad-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+#nag-dismiss-tip {
+	font-size: 0.5em;
+	opacity: 0.8;
+	color: green;
+}
+
+#nag-dismiss-tip > span {
+	display: inline;
+}
+#nag-dismiss-forever {
+	margin-left: 1px;
+	margin-top: 2px;
+	padding: 2px;
+}
+
+.hide {
+	display: none !important;
+}
+
+.fill {
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}

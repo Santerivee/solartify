@@ -1,0 +1,17 @@
+#__global_nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.3em;
+	margin: 0.1em;
+}
+
+#__global_nav > a > button {
+	color: black;
+	background-color: #f0f0f0;
+	font-size: 0.9em;
+}
+
+.__global_nav_active > button {
+	background-color: #faf0f5 !important;
+}
