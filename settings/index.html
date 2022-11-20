@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/media/solar_spotify_logo_3.png" />
+		<title>Solartify - Settings</title>
+		<script type="module" src="/js/settings.js"></script>
+		<script type="module" src="/js/globalNav.js"></script>
+		<link rel="stylesheet" href="settings.css" />
+		<link rel="manifest" href="/manifest.json" />
+	</head>
+	<body>
+		<global-nav></global-nav>
+		<main>
+			<div id="button-function" class="setting-container">
+				<h3>Button function</h3>
+				<div class="setting select-option-setting fit-content">
+					<h5>Choose player button functionality</h5>
+					<div class="setting-option">
+						<select id="button-function-select">
+							<option value="remove">Remove song from current playlist</option>
+							<option value="add">Add song to target playlist</option>
+							<option value="decide">Let me decide each time</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div id="add-song-target" class="setting-container">
+				<h3>Add song button target playlist</h3>
+				<div class="setting text-input-setting">
+					<h5>The playlist which the song will be added to</h5>
+					<input
+						disabled="disabled"
+						title="Select from playlists page"
+						id="add-target-playlist"
+						name="playlist-uri"
+						type="text"
+						placeholder="Select from playlists page"
+						onclick="window.location.href = '/playlists'" />
+				</div>
+			</div>
+			<div id="enable-fast-login" class="setting-container">
+				<h3>Enable fast login</h3>
+				<div class="setting checkbox-setting">
+					<h5>Log in without user input when token has expired</h5>
+					<div class="setting-option checkbox-option">
+						<input type="checkbox" id="fast-login-check" name="fast-login" />
+						<label for="fast-login">Enable</label>
+					</div>
+				</div>
+			</div>
+			<div id="queue-song-count" class="setting-container">
+				<h3>Count of songs to queue</h3>
+				<div class="setting number-input-setting">
+					<h5>Amount of songs to set the queue to when selecting playlist</h5>
+					<input title="Count of songs to queue" id="song-queue-count" name="song-queue-count" type="number" />
+				</div>
+			</div>
+			<div id="enable-dynamic-imgs" class="setting-container">
+				<h3>Enable dynamic image loading</h3>
+				<div class="setting checkbox-setting">
+					<h5>In playlists, load smaller quality images first, and then bigger quality images. Uses more data but looks prettier</h5>
+					<div class="setting-option checkbox-option">
+						<input type="checkbox" id="dynamic-img-check" name="dynamic-img" />
+						<label for="dynamic-img">Enable</label>
+					</div>
+				</div>
+			</div>
+			<button id="save" class="bottom-button">Save changes</button>
+			<button id="reset-defaults" class="bottom-button">Reset to defaults</button>
+			<button id="reset-active-playlist" class="bottom-button">Reset saved active playlist</button>
+		</main>
+	</body>
+</html>

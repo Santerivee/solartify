@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/media/solar_spotify_logo_3.png" />
+		<title>Solartify - index</title>
+		<script type="module" src="/js/index.js"></script>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="manifest" href="/manifest.json" />
+
+		<script>
+			"serviceWorker" in navigator && navigator.serviceWorker.register("/sw.js");
+		</script>
+	</head>
+	<body>
+		<main>
+			<div id="title-container">
+				<h1 id="main-title">Solartify</h1>
+				<div id="build">
+					<p>31.10.19.00</p>
+				</div>
+			</div>
+			<div id="container">
+				<div id="login">
+					<a href="/?action=login"><button>Login</button></a>
+				</div>
+				<div id="to-player">
+					<a href="/player/"><button>Player</button></a>
+				</div>
+				<div id="to-playlists">
+					<a href="/playlists/"><button>My playlists</button></a>
+				</div>
+				<div id="to-settings">
+					<a href="/settings/"><button>Settings</button></a>
+				</div>
+				<!-- <div id="about">
+					<a href="#"><button disabled="disabled">About</button></a>
+					<p>Soon :)</p>
+				</div> -->
+				<div id="to-github">
+					<a href="https://github.com/santerivee/solartify"><button>GitHub</button></a>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Solartify - Cookie</title>
+		<link rel="stylesheet" href="cookie.css" />
+		<link rel="manifest" href="/manifest.json" />
+	</head>
+	<body>
+		<div id="container">
+			<div class="thing">
+				<h3>Solartify uses your device's browser storage to:</h3>
+				<ul>
+					<li>Store your Spotify access token and state</li>
+					<li>Remember your settings and preferences</li>
+				</ul>
+			</div>
+			<div class="thing">
+				<h3>Solartify uses only necessary CloudFlare cookies</h3>
+				<a target="_blank" href="https://www.cloudflare.com/en-gb/cookie-policy/"><h5>Read more</h5></a>
+			</div>
+			<div class="thing" id="revoke" style="display: none">
+				<script>
+					const accepted = localStorage.getItem("cookieFunAccepted");
+					if (!accepted) document.getElementById("revoke").style.display = "none";
+				</script>
+				<button id="revokeButton" onclick="window.localStorage.clear(); window.location = window.location;">Delete my cookies</button>
+			</div>
+			<div class="thing">
+				<a href="/"><button>Home</button></a>
+			</div>
+		</div>
+	</body>
+</html>
