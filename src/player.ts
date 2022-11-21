@@ -177,7 +177,7 @@ validateOnLoad().then(state => {
 			})
 				.then(res => (res.ok ? res.json() : Promise.reject(res)))
 				.then(json => (a.playlist_name.innerText = json.name))
-				.catch(e => console.log(e));
+				.catch(e => console.warn(e));
 		}
 	}
 });
@@ -212,11 +212,9 @@ a.album_art.addEventListener("touchend", function (e: TouchEvent) {
 		if (a.toucher.end - a.toucher.start > 100) {
 			//swipe right
 			a.prev.click();
-			console.log(2);
 		} else if (a.toucher.end - a.toucher.start < -100) {
 			//swipe left
 			a.next.click();
-			console.log(1);
 		}
 		a.toucher.start = 0;
 		a.toucher.end = 0;
@@ -251,7 +249,7 @@ a.prev.addEventListener("click", function () {
 		if (res.ok) {
 			resetInterval(2);
 			handleInterval(); // call handleinterval to instantly update UI
-		} else console.log(res);
+		} else console.warn(res);
 	});
 });
 
@@ -263,7 +261,7 @@ a.next.addEventListener("click", () => {
 		if (res.ok) {
 			resetInterval(2);
 			handleInterval();
-		} else console.log(res);
+		} else console.warn(res);
 	});
 });
 
@@ -277,7 +275,7 @@ a.play.addEventListener("click", function () {
 				a.play_state = false;
 				a.play_img.src = "/media/icon_play.png";
 				resetInterval(2);
-			} else console.log(res);
+			} else console.warn(res);
 		});
 	} else {
 		fetch(BASEURL + "me/player/play", {
@@ -288,7 +286,7 @@ a.play.addEventListener("click", function () {
 				a.play_state = true;
 				a.play_img.src = "/media/icon_pause.png";
 				resetInterval(2);
-			} else console.log(res);
+			} else console.warn(res);
 		});
 	}
 	handleInterval();
@@ -304,7 +302,7 @@ a.functionButtons.remove.addEventListener("click", () => {
 		})
 			.then(res => (res.ok ? a.next.click() : res.json().then(json => (a.error.innerText = json.error.message))))
 			.catch(e => {
-				console.log(e);
+				console.warn(e);
 			});
 });
 
@@ -320,7 +318,7 @@ a.functionButtons.add.addEventListener("click", () => {
 			.then(res => res.ok || res.json().then(json => (a.error.innerText = json.error.message)))
 
 			.catch(e => {
-				console.log(e);
+				console.warn(e);
 				a.error.innerText = e.message;
 			});
 });
@@ -350,7 +348,7 @@ a.volume_button.addEventListener("click", () => {
 				a.volume = 0;
 				a.volume_button.querySelector("img")!.src = "/media/volume_0.png";
 			} else {
-				console.log(res);
+				console.warn(res);
 				res.json().then(json => (a.error.innerText = json.error.message));
 			}
 		});
@@ -367,7 +365,7 @@ a.volume_button.addEventListener("click", () => {
 				else if (a.volume < 66) a.volume_button.querySelector("img")!.src = "/media/volume_66.png";
 				else a.volume_button.querySelector("img")!.src = "/media/volume_99.png";
 			} else {
-				console.log(res);
+				console.warn(res);
 				res.json().then(json => (a.error.innerText = json.error.message));
 			}
 		});
@@ -389,7 +387,7 @@ a.volume_range.addEventListener("change", function (this: HTMLInputElement) {
 			else if (val < 66) a.volume_button.querySelector("img")!.src = "/media/volume_66.png";
 			else a.volume_button.querySelector("img")!.src = "/media/volume_99.png";
 		} else {
-			console.log(res);
+			console.warn(res);
 			res.json().then(json => (a.error.innerText = json.error.message));
 		}
 	});
@@ -404,7 +402,7 @@ a.seek_button.addEventListener("click", () => {
 			resetInterval(2);
 			handleInterval();
 		} else {
-			console.log(res);
+			console.warn(res);
 			res.json().then(json => (a.error.innerText = json.error.message));
 		}
 	});
@@ -419,7 +417,7 @@ a.seek_range.addEventListener("change", function (this: HTMLInputElement) {
 			resetInterval(2);
 			handleInterval();
 		} else {
-			console.log(res);
+			console.warn(res);
 			res.json().then(json => (a.error.innerText = json.error.message));
 		}
 	});
@@ -448,7 +446,7 @@ async function handleInterval() {
 		} else {
 			resetInterval(a.timeout + 1);
 		}
-		console.log(res);
+		console.warn(res);
 		a.error.innerText = res.status + ":: " + res.statusText;
 		return;
 	}
@@ -486,7 +484,6 @@ async function handleInterval() {
 	a.song_artist.innerText = data["item"]["artists"].map((artist: { name: string } /* todo Spotify.Artist */) => artist["name"]).join(", ");
 
 	byId("page-title").innerText = a.song_name.innerText + " - " + a.song_artist.innerText;
-	console.log(data.context);
 
 	if (data["context"]?.["uri"] && "spotify:playlist:" + a.contextId != data["context"]?.["uri"]) {
 		// context changed
@@ -524,7 +521,7 @@ async function handleInterval() {
 				fetch(BASEURL + "playlists/" + a.contextId, { headers: a.defaultHeaders })
 					.then(res => {
 						if (!res.ok) {
-							console.log(res);
+							console.warn(res);
 							return;
 						}
 						res.json().then(json => {
@@ -538,7 +535,7 @@ async function handleInterval() {
 				fetch(BASEURL + "albums/" + a.contextId, { headers: a.defaultHeaders })
 					.then(res => {
 						if (!res.ok) {
-							console.log(res);
+							console.warn(res);
 							return;
 						}
 						res.json().then(json => {
@@ -552,7 +549,7 @@ async function handleInterval() {
 				fetch(BASEURL + "artists/" + a.contextId, { headers: a.defaultHeaders })
 					.then(res => {
 						if (!res.ok) {
-							console.log(res);
+							console.warn(res);
 							return;
 						}
 						res.json().then(json => {
