@@ -293,7 +293,7 @@ a.play.addEventListener("click", function () {
 });
 
 a.functionButtons.remove.addEventListener("click", () => {
-	if (a.contextType !== "playlist") return alert("Cannot remove song from " + a.contextType + " context");
+	if (!a.contextType.endsWith("playlist")) return alert("Cannot remove song from " + a.contextType + " context");
 	confirm(`Delete ${a.song_name.innerText || "this song"} from ${a.playlist_name.innerText || "this playlist"}?`) &&
 		fetch(BASEURL + "playlists/" + a.contextId + "/tracks", {
 			method: "DELETE",

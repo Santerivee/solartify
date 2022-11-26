@@ -89,7 +89,7 @@ function render(items: any) {
 			};
 
 			clone.querySelector("li").addEventListener("click", () => {
-				// add to start of queue
+				// todo implement whenever spotify decides to add a clear queue api or something useful
 			});
 
 			// select smallest image because it is small in ui and load time is important even though it looks a bit ugly
