@@ -1,7 +1,7 @@
 export interface IDefaultHeaders extends Array<[string, string]> {
 	0: ["Content-Type", "application/json"];
 	1: ["Accept", "application/json"];
-	2: ["Authorization", string]; // i dont know how to make `Bearer ${string}` :(
+	2: ["Authorization", string]; // i dont know how to make `Bearer ${some string}` :(
 }
 
 /**

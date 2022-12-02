@@ -73,8 +73,10 @@ listBuilder.initRenderer(function (this: ListBuilder) {
 				});
 
 				// select smallest image at first. when all small images are done loading, load bigger images
-				clone.querySelector<HTMLImageElement>("img").src = item.images.reduce((prev, cur) => (prev.height < cur.height ? prev : cur)).url;
-				clone.querySelector<HTMLImageElement>("img").setAttribute("data-highres", item.images.reduce((prev, cur) => (prev.height > cur.height ? prev : cur)).url);
+				clone.querySelector<HTMLImageElement>("img").src = item.images.length > 0 ? item.images.reduce((prev, cur) => (prev.height < cur.height ? prev : cur)).url : "/media/solar_spotify_logo_3.png";
+				clone
+					.querySelector<HTMLImageElement>("img")
+					.setAttribute("data-highres", item.images.length > 0 ? item.images.reduce((prev, cur) => (prev.height > cur.height ? prev : cur)).url : "/media/solar_spotify_logo_3.png");
 				clone.querySelector<HTMLImageElement>("img").onload = e => onImgLoad(e.target as HTMLImageElement);
 
 				clone.querySelector(".playlist-name").textContent = item.name;
@@ -147,8 +149,8 @@ async function setQueue(id: string) {
 	byId("loading-container").classList.add("active");
 	byId("loading-cover").classList.add("active");
 
-	const percentage = byIdx("spinner-percentage");
-	percentage.innerText = "0%";
+	const percentage = byId("spinner-percentage");
+	percentage.innerText = "0/0";
 
 	const aborter = new AbortController();
 	byId<HTMLButtonElement>("cancel").addEventListener(
@@ -156,7 +158,7 @@ async function setQueue(id: string) {
 		() => {
 			aborter.abort();
 			byId("loading-container").classList.remove("active");
-			byIdx("loading-cover").classList.remove("active");
+			byId("loading-cover").classList.remove("active");
 		},
 		{ once: true }
 	);
@@ -183,14 +185,18 @@ async function setQueue(id: string) {
 					percentage.innerText = "Service unavailable, retrying in " + i + "s";
 					await new Promise(resolve => setTimeout(resolve, 1000));
 				}
+				percentage.innerText = songs.length + "/" + total;
+				continue; // dont know if this works as intended
 			} else return alert(res.statusText);
 		}
 
 		const json = await res.json();
 		offset += json.limit;
 		total = json.total;
-		songs.push(...json.items.map((item: { track: { uri: string } } /* TODO Spotify.Song */) => item.track.uri));
-		percentage.innerText = Math.round((songs.length / total) * 100) + "%";
+
+		for (let i = 0; i < json.items.length; i++) if (!json.items[i].track.uri.startsWith("spotify:local")) songs.push(json.items[i].track.uri);
+
+		percentage.innerText = songs.length + "/" + total;
 	}
 
 	//shuffle songs https://stackoverflow.com/a/12646864
@@ -203,7 +209,7 @@ async function setQueue(id: string) {
 	(async () => {
 		let device_id = "";
 		let i = 0;
-		const qCount = JSON.parse(localStorage.getItem("settings") as string).queueCount; // NOT null!!!!!!!!!!!!
+		const qCount = JSON.parse(localStorage.getItem("settings")!).queueCount; // NOT null!!!!!!!!!!!!
 		// attempt 3 times because sometimes api says no for no reason
 		while (++i < 4) {
 			const res = await fetch(`https://api.spotify.com/v1/me/player/play${device_id && "?device_id=" + device_id}`, {
@@ -221,9 +227,9 @@ async function setQueue(id: string) {
 				break;
 			}
 
-			// since solartify mini doesnt actually play the song, spotify needs to know what device it should start playback on
+			// since solartify doesnt actually play the song, spotify needs to know what device it should start playback on
 			if (res.status == 404 && (await res.json())?.["error"]?.["reason"] == "NO_ACTIVE_DEVICE") {
-				device_id = await showDevicesModal(); // hacky function at 2am
+				device_id = await showDevicesModal(); // 2am
 				if (!device_id) break;
 				continue;
 			}
@@ -260,7 +266,7 @@ async function showDevicesModal(): Promise<string> {
 	target.innerHTML = "";
 	const template = byId<HTMLTemplateElement>("device-template");
 
-	let resolve = (device_id: unknown) => device_id; // scuffed
+	let resolve = (device_id: unknown) => device_id; // ??? idk
 	const returnPromise = new Promise(res => (resolve = res));
 
 	devices.forEach(device => {
@@ -296,7 +302,7 @@ function onImgLoad(target: HTMLImageElement) {
 	// TODO replace this shit with intersection observer to stop loading 10000 images that wont be used. html lazy loading didnt seem to work.
 	if (!useDynamicLoading) return;
 	loadedImages.push(target);
-	if (loadedImages.length == listBuilder.searchables.length) {
+	if (loadedImages.length >= listBuilder.searchables.length) {
 		loadedImages.forEach(img => {
 			if ("highres" in img.dataset) {
 				img.src = img.dataset.highres as string;
